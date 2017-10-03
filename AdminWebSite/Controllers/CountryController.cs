@@ -16,6 +16,7 @@ namespace AdminWebSite.Controllers
         {
             _context = new EFContext();
         }
+        //hello
         // GET: Country
         public ActionResult Index()
         {
