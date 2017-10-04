@@ -1,5 +1,5 @@
 ﻿using AdminWebSite.DAL;
-using AdminWebSite.DAL.Entityes;
+using AdminWebSite.DAL.Entities;
 using AdminWebSite.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,6 @@ namespace AdminWebSite.Controllers
         {
             _context = new EFContext();
         }
-        //hello
         // GET: Country
         public ActionResult Index()
         {
@@ -28,14 +27,12 @@ namespace AdminWebSite.Controllers
                     Id = c.Id,
                     Name = c.Name,
                     Priority = c.Priority,
-                    DateCreate = c.DataCreate
+                    DateCreate = c.DateCreate
                 })
-                .OrderBy(c=>c.Priority)
+                .OrderBy(c => c.Priority)
                 .ToList();
             return View(model);
-
         }
-
         public ActionResult Create()
         {
             return View();
@@ -45,10 +42,9 @@ namespace AdminWebSite.Controllers
         {
             Country country = new Country
             {
-                DataCreate = DateTime.Now,
-                Name=model.Name,
-                Priority=model.Priority
-
+                DateCreate = DateTime.Now,
+                Name = model.Name,
+                Priority = model.Priority
             };
             _context.Countries.Add(country);
             _context.SaveChanges();

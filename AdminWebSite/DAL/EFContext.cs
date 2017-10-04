@@ -1,4 +1,4 @@
-﻿using AdminWebSite.DAL.Entityes;
+﻿using AdminWebSite.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
