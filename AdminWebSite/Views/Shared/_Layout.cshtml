@@ -34,11 +34,16 @@
             <div class="content">
                 <ul class="sidemenu">
                     <li>
-                        <a class="menulinks" href="@Url.Action("Index", "Country")">Country</a>
+                        <a class="menulinks @((ViewBag.MenuCountry!= null) ? "active" : "")" 
+                           href="@Url.Action("Index", "Country")">Country</a>
                     </li>
                     <li>
-                        @Html.ActionLink("City", "Index", "City", null, new { @class="menulinks"})
+                        <a class="menulinks @((ViewBag.MenuCity!= null) ? "active" : "")" 
+                           href="@Url.Action("Index", "City")">City</a>
                     </li>
+                    @*<li>
+                        @Html.ActionLink("City", "Index", "City", null, new { @class="menulinks"})
+                    </li>*@
                     
                 </ul>
             </div>

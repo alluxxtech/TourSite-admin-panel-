@@ -15,6 +15,8 @@ namespace AdminWebSite.Controllers
         public CountryController()
         {
             _context = new EFContext();
+            ViewBag.MenuCountry = true;
+
         }
         // GET: Country
         public ActionResult Index()
