@@ -19,14 +19,40 @@ namespace AdminWebSite.Models
         [Display(Name = "Країна")]
         public string Country { get; set; }
     }
+
     public class CityCreateViewModel
     {
+        [Required(ErrorMessage = "Поле е обявязковим")]
         [Display(Name = "Назва")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Поле е обявязковим")]
         [Display(Name = "Пріорітет")]
         public int Priority { get; set; }
+        [Required(ErrorMessage = "Поле е обявязковим")]
         [Display(Name = "Країна")]
         public int CountryId { get; set; }
         public List<SelectItemViewModel> Countries { get; set; }
+    }
+
+    public class CityEditViewModel
+    {
+        [Display(Name = "Код миста")]
+        public int Id { get; set; }
+        [Required(ErrorMessage = "Поле е обявязковим")]
+        [Display(Name = "Назва")]
+        public string Name { get; set; }
+        [Required(ErrorMessage = "Поле е обявязковим")]
+        [Range(1, short.MaxValue)]
+        [Display(Name = "Пріорітет")]
+        public int Priority { get; set; }
+        [Required(ErrorMessage = "Поле е обявязковим")]
+        [Display(Name = "Краина")]
+        public int CountryId { get; set; }
+        public List<SelectItemViewModel> Countries { get; set; }
+    }
+
+    public class CityDetailsModel : CityViewModel
+    {
+
     }
 }

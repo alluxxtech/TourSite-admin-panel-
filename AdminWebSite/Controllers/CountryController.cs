@@ -35,6 +35,7 @@ namespace AdminWebSite.Controllers
                 .ToList();
             return View(model);
         }
+
         public ActionResult Create()
         {
             return View();
@@ -42,14 +43,82 @@ namespace AdminWebSite.Controllers
         [HttpPost]
         public ActionResult Create(CountryCreateViewModel model)
         {
-            Country country = new Country
+            if (ModelState.IsValid)
             {
-                DateCreate = DateTime.Now,
-                Name = model.Name,
-                Priority = model.Priority
+                Country country = new Country
+                {
+                    DateCreate = DateTime.Now,
+                    Name = model.Name,
+                    Priority = model.Priority
+                };
+                _context.Countries.Add(country);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ModelState.AddModelError("", "Дружок не тупи!!!");
+            
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var country = _context.Countries.FirstOrDefault(c => c.Id == id);
+            if (country != null)
+            {
+                var model = new CountryEditViewModel
+                {
+                    Id = country.Id,
+                    Name = country.Name,
+                    Priority = country.Priority
+                };
+                return View(model);
+            }
+            return RedirectToAction("Index");
+
+        }
+
+        [HttpPost]
+        public ActionResult Edit(CountryEditViewModel model)
+        {
+            var country = _context.Countries.FirstOrDefault(c => c.Id == model.Id);
+            if( country != null)
+            {
+                country.Name = model.Name;
+                country.Priority = model.Priority;
+
+                _context.SaveChanges();
+                
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            var country = _context.Countries.FirstOrDefault(c => c.Id == id);
+
+            var model = new CountryDetailsModel
+            {
+                Id = country.Id,
+                Name = country.Name,
+                DateCreate = country.DateCreate,
+                Priority = country.Priority
             };
-            _context.Countries.Add(country);
-            _context.SaveChanges();
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var country = _context.Countries.FirstOrDefault(c => c.Id == id);
+            if ( country != null)
+            {
+                _context.Countries.Remove(country);
+                _context.SaveChanges();
+               
+            }
+            
             return RedirectToAction("Index");
         }
     }

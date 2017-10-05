@@ -58,5 +58,61 @@ namespace AdminWebSite.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var city = _context.Cities.FirstOrDefault(c => c.Id == id);
+            var model = new CityEditViewModel
+            {
+                Id = city.Id,
+                Name = city.Name,
+                Priority = city.Priority,
+                CountryId = city.CountryId,                
+            };
+            return View(model);
+        }        
+
+        [HttpPost]
+        public ActionResult Edit(CityEditViewModel model)
+        {
+            var city = _context.Cities.FirstOrDefault(c => c.Id == model.Id);
+            city.Name = model.Name;
+            city.Priority = model.Priority;
+            city.CountryId = model.CountryId;
+
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            var city = _context.Cities.FirstOrDefault(c => c.Id == id);
+
+            var model = new CityDetailsModel
+            {
+                Id = city.Id,
+                Name = city.Name,
+                DateCreate = city.DateCreate,
+                Priority = city.Priority,
+                Country = city.Country.Name
+            };
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var city = _context.Cities.FirstOrDefault(c => c.Id == id);
+            if (city != null)
+            {
+                _context.Cities.Remove(city);
+                _context.SaveChanges();
+
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

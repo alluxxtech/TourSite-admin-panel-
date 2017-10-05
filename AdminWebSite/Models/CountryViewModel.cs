@@ -19,9 +19,30 @@ namespace AdminWebSite.Models
     }
     public class CountryCreateViewModel
     {
+        [Required(ErrorMessage = "Поле е обявязковим")]
         [Display(Name = "Назва")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Поле е обявязковим")]
+        [Range(1, short.MaxValue)]
         [Display(Name = "Пріорітет")]
         public int Priority { get; set; }
+    }
+
+    public class CountryEditViewModel
+    {
+        [Display(Name = "Код країни")]
+        public int Id { get; set; }
+        [Required(ErrorMessage = "Поле е обявязковим")]
+        [Display(Name = "Назва")]
+        public string Name { get; set; }
+        [Required(ErrorMessage = "Поле е обявязковим")]
+        [Range(1, short.MaxValue)]
+        [Display(Name = "Пріорітет")]
+        public int Priority { get; set; }
+    }
+
+    public class CountryDetailsModel : CountryViewModel
+    {
+        
     }
 }
